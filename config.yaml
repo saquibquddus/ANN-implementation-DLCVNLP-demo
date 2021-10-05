@@ -16,6 +16,6 @@ artifacts:
   checkpoint_dir: checkpoints
 
 logs:
-  logs_dir: logs_dir
+  logs_dir: logs
   general_logs: general_logs
   tensorboard_logs: tensorboard_logs
