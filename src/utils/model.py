@@ -3,6 +3,7 @@ import logging
 import io
 import time
 import os
+import matplotlib.pyplot as plt
 
 def create_model(LOSS_FUNCTION, OPTIMIZER, METRICS, NUM_CLASSES):
     logging.info(f"\n Model creation started \n")
@@ -30,3 +31,10 @@ def save_model(model, model_name, model_dir):
     unique_file_name= get_unique_filename(model_name)
     path_to_model= os.path.join(model_dir, unique_file_name)
     model.save(path_to_model)
+
+def save_plot(df, plots_name, plots_dir):
+    df.plot(figsize=(10, 7))
+    plt.grid(True)
+    unique_file_name = get_unique_filename(plots_name)
+    path_to_model = os.path.join(plots_dir, unique_file_name)
+    plt.savefig(path_to_model)
