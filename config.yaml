@@ -1,5 +1,5 @@
 params:
-  epochs: 30
+  epochs: 5
   batch_size: 32
   num_classes: 10
   loss_function: sparse_categorical_crossentropy
@@ -12,6 +12,8 @@ params:
 artifacts: 
   artifacts_dir: artifacts
   model_dir: model
+  ckpt_model_dir: ckpt_model
+  ckpt_model_name: ckpt.h5
   plots_dir: plots
   checkpoint_dir: checkpoints
   model_name: model.h5
@@ -20,4 +22,6 @@ artifacts:
 logs:
   logs_dir: logs
   general_logs: general_logs
+  general_logs_name: general_logs.log
   tensorboard_logs: tensorboard_logs
+  tensorboard_name: tensorboard

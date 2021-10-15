@@ -38,3 +38,16 @@ def save_plot(df, plots_name, plots_dir):
     unique_file_name = get_unique_filename(plots_name)
     path_to_model = os.path.join(plots_dir, unique_file_name)
     plt.savefig(path_to_model)
+
+def get_tensorboard_log_path(tensorboard_name,tensorboard_dir):
+  unique_name=get_unique_filename(tensorboard_name)
+  tensorboard_log_path=os.path.join(tensorboard_dir,unique_name)
+  print(f"saving logs at : {tensorboard_log_path}")
+  return tensorboard_log_path
+
+def get_general_log_path(general_logs_name, general_log_path_dir):
+    unique_name = get_unique_filename(general_logs_name)
+    general_log_path = os.path.join(general_log_path_dir, unique_name)
+    print(f"saving logs at : {general_log_path}")
+    return general_log_path
+
