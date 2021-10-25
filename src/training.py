@@ -1,6 +1,7 @@
 from src.utils.common import read_config
 from src.utils.data_mgmt import get_data
 from src.utils.model import create_model, save_model, save_plot, get_tensorboard_log_path, get_general_log_path, get_unique_filename
+from src.utils.callbacks import get_callbacks
 import argparse
 import logging
 import os
@@ -66,9 +67,12 @@ def training(config_path):
     logging.info(f"\n Model fitting started \n")
     EPOCHS = config["params"]["epochs"]
     VALIDATION_SET = (X_valid, y_valid)
+
+    CALLBACKS_LIST_NEW= get_callbacks(config, X_train)
+
     history = model.fit(X_train, y_train, epochs=EPOCHS,
                    validation_data=VALIDATION_SET,
-                        callbacks=CALLBACKS_LIST)
+                        callbacks=CALLBACKS_LIST_NEW)
     logging.info(f"\n {pd.DataFrame(history.history)} \n")
 
     artifacts_dir=config["artifacts"]["artifacts_dir"]
