@@ -36,34 +36,6 @@ def training(config_path):
     
     model=create_model(LOSS_FUNCTION, OPTIMIZER, METRICS, NUM_CLASSES)
 
-    #creatng tensorboard callback and saving the model
-    tensorboard_name=config["logs"]["tensorboard_name"]
-    tensorboard_logs=config["logs"]["tensorboard_logs"]
-    tensorboard_dir=os.path.join(log_dir,tensorboard_logs)
-    os.makedirs(tensorboard_dir, exist_ok=True)
-    tensorboard_logs_path=get_tensorboard_log_path(tensorboard_name, tensorboard_dir)
-    tensorboard_cb = tf.keras.callbacks.TensorBoard(log_dir=tensorboard_logs_path)
-
-    #creating early stopping call backs
-    early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
-
-    # Writing logs for training data in tensorboard logs.
-    file_writer = tf.summary.create_file_writer(logdir=tensorboard_logs_path)
-    with file_writer.as_default():
-        images = np.reshape(X_train[10:30], (-1, 28, 28, 1))
-        tf.summary.image("20 handwritten digit samples", images, max_outputs=25, step=0)
-
-    #Creating CKPT_model and saving it.
-    artifacts_dir = config["artifacts"]["artifacts_dir"]
-    ckpt_model_name = config["artifacts"]["ckpt_model_name"]
-    ckpt_model_dir = config["artifacts"]["ckpt_model_dir"]
-    ckpt_model_dir_path = os.path.join(artifacts_dir, ckpt_model_dir)
-    os.makedirs(ckpt_model_dir_path, exist_ok=True)
-    ckpt_unique_name=get_unique_filename(ckpt_model_name)
-    ckpt_path= os.path.join(ckpt_model_dir_path, ckpt_unique_name)
-    checkpointing_cb = tf.keras.callbacks.ModelCheckpoint(ckpt_path, save_best_only=True)
-    CALLBACKS_LIST = [tensorboard_cb, early_stopping_cb, checkpointing_cb]
-
     logging.info(f"\n Model fitting started \n")
     EPOCHS = config["params"]["epochs"]
     VALIDATION_SET = (X_valid, y_valid)

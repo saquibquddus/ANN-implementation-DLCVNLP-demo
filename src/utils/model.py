@@ -51,3 +51,8 @@ def get_general_log_path(general_logs_name, general_log_path_dir):
     print(f"saving logs at : {general_log_path}")
     return general_log_path
 
+def get_timestamp(name):
+    timestamp = time.asctime().replace(" ","_").replace(":","_") 
+    unique_name = f"{name}_at_{timestamp}"
+    return unique_name
+
