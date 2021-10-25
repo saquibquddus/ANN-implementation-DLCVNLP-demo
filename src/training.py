@@ -31,7 +31,7 @@ def training(config_path):
 
     LOSS_FUNCTION=config["params"]["loss_function"]
     OPTIMIZER=config["params"]["optimizer"]
-    METRICS=config["params"]["metrics"]
+    METRICS=config["params"]["metrics"] 
     NUM_CLASSES=config["params"]["num_classes"]
     
     model=create_model(LOSS_FUNCTION, OPTIMIZER, METRICS, NUM_CLASSES)
@@ -40,7 +40,7 @@ def training(config_path):
     EPOCHS = config["params"]["epochs"]
     VALIDATION_SET = (X_valid, y_valid)
 
-    # create callbacks
+    #comments added to main
     CALLBACKS_LIST_NEW= get_callbacks(config, X_train)
 
     history = model.fit(X_train, y_train, epochs=EPOCHS,
